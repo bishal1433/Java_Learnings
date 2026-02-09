@@ -1,0 +1,219 @@
+FunctionalInterface :
+    An interface that has exactly one abstract method. It can have multiple default or static methods, but only one abstract method.
+    Functional interfaces are used as the basis for lambda expressions and method references in Java.
+Lambda Expression :
+    A concise way to represent an anonymous function that can be passed around as an object.
+    It can be used to implement the single abstract method of a functional interface.
+Types of Functional Interfaces :
+    Runnable : Represents a task that can be executed concurrently.
+    Callable : Similar to Runnable but can return a result and throw checked exceptions.
+    Supplier : Represents a supplier of results, providing a method that returns a value.
+    Consumer : Represents an operation that accepts a single input argument and returns no result.
+    Function : Represents a function that accepts one argument and produces a result.
+    Predicate : Represents a boolean-valued function of one argument, often used for filtering or matching conditions.
+Syntax of Supplier :
+    Supplier<T> supplier = () -> {
+        // implementation code
+        return value;
+    };
+Syntax of Consumer :
+    Consumer<T> consumer = (input) -> {
+        // implementation code
+    };
+Syntax of Function :
+    Function<T, R> function = (input) -> {
+        // implementation code
+        return result;
+    };
+Syntax of Predicate :
+    Predicate<T> predicate = (input) -> {
+        // implementation code
+        return condition;
+    };
+
+
+
+AtomicVariable :
+    A class that provides a way to perform atomic operations on a variable, ensuring thread safety without the need for synchronization.
+    It is part of the java.util.concurrent.atomic package and provides methods for atomic updates, such as get(), set(), compareAndSet(), etc.
+
+Atomic Variables use CAS (Compare-And-Swap) operations to ensure that updates to the variable are atomic and thread-safe.
+This allows multiple threads to update the variable concurrently without the risk of race conditions or inconsistent states.
+Atomic variables are commonly used in concurrent programming to manage shared resources and ensure data integrity.
+
+
+Compare-And-Swap (CAS) :
+    1. A low-level atomic operation used in concurrent programming to achieve synchronization without locks.
+    2. It works by comparing the current value of a variable with an expected value and,
+       if they match, updating the variable to a new value in a single atomic step.
+    3. CAS is often used in the implementation of atomic variables and concurrent data structures to ensure thread safety and avoid
+
+ConcurrentHashMap :
+    1. A thread-safe implementation of the Map interface that allows concurrent access and updates by multiple threads.
+    2. It uses a combination of locking and non-blocking techniques to achieve high concurrency and performance.
+    3. ConcurrentHashMap is designed to handle concurrent read and write operations efficiently,
+       making it suitable for use in multi-threaded applications.
+    4. It use CAS operations to ensure thread safety and avoid the need for external synchronization when accessing or modifying the map.
+
+final :
+    1. A keyword in Java that can be applied to variables, methods, and classes.
+    2. When applied to a variable, it means that the variable cannot be reassigned after it has been initialized.
+    3. When applied to a method, it means that the method cannot be overridden by subclasses.
+    4. When applied to a class, it means that the class cannot be subclassed.
+    5. The final keyword is often used to create constants, ensure immutability, and prevent unintended modifications to variables, methods, or classes.
+
+
+Threads:
+    1. A thread is a lightweight unit of execution within a process that can run concurrently with other threads.
+    2. Threads allow for parallelism and can improve the performance of applications by utilizing multiple CPU cores.
+    3. In Java, threads can be created by extending the Thread class or implementing the Runnable interface.
+    4. Threads can be managed using various methods such as start(), sleep(), join(), etc., to control their execution and synchronization.
+
+ Implementation of Thread by using Runnable interface:
+    1. Create a class that implements the Runnable interface.
+    2. Override the run() method to define the code that will be executed by the thread.
+    3. Create an instance of the Thread class, passing an instance of the Runnable implementation to its constructor.
+    4. Call the start() method on the Thread instance to begin execution of the thread.
+
+Example:
+```java
+class MyRunnable implements Runnable {
+    @Override
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        MyRunnable myRunnable = new MyRunnable();
+        Thread thread = new Thread(myRunnable);
+        thread.start();
+    }
+}
+```
+
+
+
+Implementation of Thread by using Thread class:
+    1. Create a class that extends the Thread class.
+    2. Override the run() method to define the code that will be executed by the thread.
+    3. Create an instance of the class that extends Thread.
+    4. Call the start() method on the instance to begin execution of the thread.
+Example:
+```java
+class MyThread extends Thread {
+    @Override
+    public void run() {
+        System.out.println("Thread is running");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        MyThread myThread = new MyThread();
+        myThread.start();
+    }
+}```
+
+
+Implementation of Thread by using Lambda Expression:
+    1. Create a Runnable instance using a lambda expression that defines the code to be executed by the thread.
+    2. Create an instance of the Thread class, passing the Runnable instance to its constructor.
+    3. Call the start() method on the Thread instance to begin execution of the thread.
+Example:
+```java
+public class Main {
+    public static void main(String[] args) {
+        Runnable runnable = () -> System.out.println("Thread is running");
+        Thread thread = new Thread(runnable);
+        thread.start();
+    }
+}```
+
+Thread class functions:
+    1. start(): Starts the execution of the thread.
+    2. run(): Contains the code that will be executed by the thread.
+    3. sleep(long millis): Causes the thread to sleep for a specified number of milliseconds.
+    4. join(): Waits for the thread to die (i.e., complete its execution).
+    5. interrupt(): Interrupts the thread, causing it to stop if it is currently sleeping or waiting.
+    6. getName(): Returns the name of the thread.
+    7. setName(String name): Sets the name of the thread.
+    8. getPriority(): Returns the priority of the thread.
+    9. setPriority(int priority): Sets the priority of the thread.
+    10. isAlive(): Returns true if the thread is still running, false otherwise.
+
+
+Difference between start() and run() methods:
+    1. start(): This method is used to start the execution of a thread.
+       It creates a new thread and calls the run() method in that thread. It allows the thread to run concurrently with other threads.
+    2. run(): This method contains the code that will be executed by the thread.
+       It is called when the thread is started using the start() method.
+       If you call the run() method directly, it will not create a new thread and will execute in the current thread instead of running concurrently.
+
+Thread States:
+    1. New: The thread is created but has not yet started.
+    2. Runnable: The thread is ready to run and is waiting for the CPU to schedule it.
+    3. Running: The thread is currently executing.
+    4. Blocked: The thread is waiting for a monitor lock to enter a synchronized block or method.
+    5. Waiting: The thread is waiting indefinitely for another thread to perform a specific action (e.g., wait(), join()).
+    6. Timed Waiting: The thread is waiting for a specified amount of time (e.g., sleep(), wait(timeout)).
+    7. Terminated: The thread has completed its execution or has been terminated.
+
+Thread Pool :
+    1. A thread pool is a collection of pre-instantiated threads that are ready to execute tasks.
+    2. It allows for efficient management of threads by reusing existing threads instead of creating new ones for each task.
+    3. Thread pools can improve performance and resource utilization in applications that require concurrent execution of tasks.
+    4. In Java, the Executor framework provides a convenient way to create and manage thread pools using classes like ThreadPoolExecutor and Executors.
+
+Internal Structure and Working of Thread Pool:
+    1. A thread pool typically consists of a fixed number of worker threads that are created at the time of pool initialization.
+    2. Tasks are submitted to the thread pool, and the pool manages the execution of these tasks using the available worker threads.
+    3. The thread pool maintains a queue of tasks that are waiting to be executed. When a worker thread becomes available, it retrieves a task from the queue and executes it.
+    4. If all worker threads are busy executing tasks, additional tasks will wait in the queue until a thread becomes available.
+    5. The thread pool can also manage the lifecycle of threads, allowing for graceful shutdown and handling of exceptions that may occur during task execution.
+
+ExecutorService :
+    1. ExecutorService is an interface in the java.util.concurrent package that provides a higher-level API for managing and executing tasks asynchronously.
+    2. It allows you to submit tasks for execution, manage the lifecycle of threads, and handle task completion and exceptions.
+    3. ExecutorService provides methods such as submit(), invokeAll(), shutdown(), etc., to manage the execution of tasks and the thread pool.
+```java
+ExecutorService executorService = Executors.newFixedThreadPool(10);
+executorService.submit(() -> {
+    // Task implementation
+});
+executorService.shutdown();
+```
+
+Methods in ExecutorService:
+    1. submit(Runnable task): Submits a Runnable task for execution and returns a Future representing the pending result.
+    2. submit(Callable<T> task): Submits a Callable task for execution and returns a Future representing the pending result.
+    3. invokeAll(Collection<? extends Callable<T>> tasks): Executes the given tasks, returning a list of Futures representing the tasks, in the same order as produced by the iterator for the given task list.
+    4. shutdown(): Initiates an orderly shutdown of the thread pool, allowing previously submitted tasks to execute before terminating.
+    5. shutdownNow(): Attempts to stop all actively executing tasks and halts the processing of waiting tasks, returning a list of tasks that were awaiting execution.
+    6. isShutdown(): Returns true if the thread pool has been shut down, false otherwise.
+    7. isTerminated(): Returns true if all tasks have completed following a shutdown, false otherwise.
+
+
+ Runnable and Callable :
+    1. Runnable is a functional interface that represents a task that can be executed concurrently.
+       It has a single abstract method run() that does not return a result and cannot throw checked exceptions.
+    2. Callable is a functional interface that represents a task that can be executed concurrently and can return a result.
+       It has a single abstract method call() that returns a value and can throw checked exceptions.
+    3. The main difference between Runnable and Callable is that Runnable does not return a result and cannot throw checked exceptions, while Callable can return a result and can throw checked exceptions.
+    4. When using ExecutorService, you can submit both Runnable and Callable tasks for execution, but only Callable tasks will return a Future representing the pending result of the task.
+
+
+Non Daemon and Daemon Threads:
+    1. Non-Daemon Threads: These are the normal threads that run in a Java application. They keep the application running until they complete their execution. The JVM will not exit until all non-daemon threads have finished.
+    2. Daemon Threads: These are background threads that do not prevent the JVM from exiting when the program finishes. They are typically used for tasks such as garbage collection, background monitoring, or other tasks that should not block the application from shutting down. If all non-daemon threads finish, the JVM will exit even if there are still daemon threads running.
+    3. You can set a thread as a daemon thread by calling the setDaemon(true) method on the Thread instance before starting it.
+```java
+Thread daemonThread = new Thread(() -> {
+    // Daemon thread task
+});
+daemonThread.setDaemon(true);
+daemonThread.start();
+```
+
+
+
+
